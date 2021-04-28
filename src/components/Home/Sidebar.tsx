@@ -1,4 +1,5 @@
 import React from "react";
+import HomeEntries from "./HomeEntries";
 
 const Sidebar = () => {
     return (
@@ -16,6 +17,7 @@ const Sidebar = () => {
                     New entry
                 </p>
             </div>
+            <HomeEntries />
         </aside>
     );
 };
