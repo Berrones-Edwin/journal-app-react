@@ -1,17 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { login } from "../../actions/auth";
+import { loginInterface } from "../../models/login";
 
 const LoginScreen = () => {
+    const dispatch = useDispatch();
+
+    const [values, setValues] = useState<loginInterface>({
+        email: "email@gmail.com",
+        password: "passowrd",
+    });
+
+    const reset = () => {
+        setValues({
+            email: "",
+            password: "",
+        });
+    };
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setValues({
+            ...values,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const { email, password } = values;
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        dispatch(login(email, password));
+        console.log(email, password);
+
+        reset()
+    };
+
     return (
         <>
             <h3 className="auth__title">Login</h3>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <input
                     type="text"
                     placeholder="enter your username"
                     name="email"
                     autoComplete="off"
                     className="auth__input"
+                    onChange={handleInputChange}
+                    value={values.email}
                 />
                 <input
                     type="password"
@@ -19,6 +55,8 @@ const LoginScreen = () => {
                     name="password"
                     autoComplete="off"
                     className="auth__input"
+                    onChange={handleInputChange}
+                    value={values.password}
                 />
                 <button className="btn btn-primary btn-block" type="submit">
                     Login
@@ -39,7 +77,9 @@ const LoginScreen = () => {
                         </p>
                     </div>
                 </div>
-                <Link className="link" to="/auth/register">Create new account</Link>
+                <Link className="link" to="/auth/register">
+                    Create new account
+                </Link>
             </form>
         </>
     );

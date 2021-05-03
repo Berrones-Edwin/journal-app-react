@@ -9,9 +9,9 @@ const AppRoutes = () => {
         <BrowserRouter>
             <div>
                 <Switch>
-                    <Route path="/auth" component={Auth} />
-                    <Route  path="/" component={Home} />
-                    <Redirect to="/auth" />
+                    <Route  path="/auth" component={Auth} />
+                    <Route exact path="/" component={Home} />
+                    <Redirect to="/auth/login" />
                 </Switch>
             </div>
         </BrowserRouter>
