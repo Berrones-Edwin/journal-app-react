@@ -1,30 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { login } from "../../actions/auth";
+import { login, startGoogleLogin } from "../../actions/auth";
+import { useForm } from "../../hooks/useForm";
 import { loginInterface } from "../../models/login";
 
 const LoginScreen = () => {
     const dispatch = useDispatch();
 
-    const [values, setValues] = useState<loginInterface>({
-        email: "email@gmail.com",
-        password: "passowrd",
+    const [values, handleInputChange, reset] = useForm<loginInterface>({
+        email: "admin@gmail.com",
+        password: "password",
     });
-
-    const reset = () => {
-        setValues({
-            email: "",
-            password: "",
-        });
-    };
-
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValues({
-            ...values,
-            [e.target.name]: e.target.value,
-        });
-    };
 
     const { email, password } = values;
 
@@ -33,8 +20,13 @@ const LoginScreen = () => {
         dispatch(login(email, password));
         console.log(email, password);
 
-        reset()
+        reset();
     };
+
+    const handleLoginWithGoogle = ()=>{
+        // console.log('login with google')
+        dispatch(startGoogleLogin())
+    }
 
     return (
         <>
@@ -64,7 +56,7 @@ const LoginScreen = () => {
 
                 <div className="auth__social-network">
                     <p>Login with social networks</p>
-                    <div className="google-btn">
+                    <div className="google-btn" onClick={handleLoginWithGoogle}>
                         <div className="google-icon-wrapper">
                             <img
                                 src="https://img2.freepng.es/20180610/jeu/kisspng-google-logo-google-search-google-now-5b1dacc1ad0462.3234288415286714257087.jpg"

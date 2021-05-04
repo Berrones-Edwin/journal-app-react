@@ -1,7 +1,9 @@
 import { useState } from "react";
 
-export const useForm = (initialState= {}) => {
-    const [values, setValues] = useState(initialState);
+export const useForm = <T>(
+    initialState: T
+): [T, (e: React.ChangeEvent<HTMLInputElement>) => void, () => void] => {
+    const [values, setValues] = useState<T>(initialState);
 
     const reset = () => {
         setValues(initialState);
