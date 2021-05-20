@@ -9,4 +9,11 @@ const removeError = () => ({
     type: types.uiRemoveError,
 });
 
-export { setError, removeError };
+const startLoading = () => ({
+    type: types.uiStartLoading,
+});
+const finishLoading = () => ({
+    type: types.uiFinishLoading,
+});
+
+export { setError, removeError, startLoading, finishLoading };

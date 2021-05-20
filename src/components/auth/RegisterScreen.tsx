@@ -6,8 +6,6 @@ import { useForm } from "../../hooks/useForm";
 import isEmail from "validator/es/lib/isEmail";
 import { startRegisterWithEmailPasswordName } from "../../actions/auth";
 
-// import validator from 'validator';
-
 const RegisterScreen = () => {
     const dispatch = useDispatch();
     const { msg } = useSelector((state: any) => state.ui);
@@ -22,13 +20,17 @@ const RegisterScreen = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        console.log('handle submit');
 
-        if (isFormValid())
+        if (isFormValid()){
+            console.log('register user');
+            
             dispatch(startRegisterWithEmailPasswordName(name, email, password));
+        }
     };
 
     const isFormValid = (): boolean => {
-        let response = false;
+        let response = true;
 
         if (name.trim().length === 0) {
             response = false;
