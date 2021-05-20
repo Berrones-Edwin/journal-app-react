@@ -18,13 +18,10 @@ const LoginScreen = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(login(email, password));
-        console.log(email, password);
-
         reset();
     };
 
     const handleLoginWithGoogle = ()=>{
-        // console.log('login with google')
         dispatch(startGoogleLogin())
     }
 
