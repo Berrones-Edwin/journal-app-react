@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, Route, Switch } from "react-router";
+import { Redirect, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import Home from "../components/Home/Home";
 import Auth from "./Auth";
@@ -32,8 +32,6 @@ const AppRoutes = () => {
         <BrowserRouter>
             <div>
                 <Switch>
-                    {/* <Route path="/auth" component={Auth} />*/}
-
                     <PublicRoutes
                         isAuthenticated={isLoggedIn}
                         path="/auth"
