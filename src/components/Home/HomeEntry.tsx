@@ -1,27 +1,37 @@
 import React from "react";
-
-const HomeEntry = () => {
+type HomeEntryProps = {
+    id: number;
+    title: string;
+    body: string;
+    date: string;
+    url: string;
+};
+const HomeEntry: React.FC<HomeEntryProps> = ({
+    id,
+    title,
+    body,
+    date,
+    url,
+}) => {
     return (
         <div className="home__entry pointer">
-            <div
-                className="home__entry-picture"
-                style={{
-                    backgroundSize: "cover",
-                    backgroundImage:
-                        "url('https://images.pexels.com/photos/7286190/pexels-photo-7286190.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500')",
-                }}
-            ></div>
+            {url && (
+                <div
+                    className="home__entry-picture"
+                    style={{
+                        backgroundSize: "cover",
+                        backgroundImage: ` url(${url}) `,
+                    }}
+                ></div>
+            )}
             <div className="home__entry-body">
-                <p className="home__entry-title">New day</p>
-                <p className="home__entry-content">
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                    Libero natus doloremque eveniet ut veniam consequatur nulla
-                    at quibusdam quis? Vero?
-                </p>
+                <p className="home__entry-title">{title}</p>
+                <p className="home__entry-content">{body}</p>
             </div>
             <div className="home__entry-date-box">
-                <span>Monday</span>
-                <h4>28</h4>
+                {/* <span>Monday</span>
+                <h4>28</h4> */}
+                {date}
             </div>
         </div>
     );

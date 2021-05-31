@@ -6,7 +6,6 @@ import Sidebar from "./Sidebar";
 
 const Home = () => {
     const { active } = useSelector((s: any) => s.notes);
-    console.log(active)
     return (
         <div className="home__main-content">
             <Sidebar />
