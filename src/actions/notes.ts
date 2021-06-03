@@ -39,3 +39,42 @@ export const setNotes = (notes: any) => ({
     type: types.notesLoad,
     payload: notes,
 });
+
+export const startSaveNote = (note: any) => {
+    return async (dispatch: any, getState: any) => {
+        const { uid } = getState().auth;
+
+        if (!note.url) delete note.url;
+
+        const noteToFirebase = { ...note };
+        delete noteToFirebase.id;
+
+        const response = db
+            .collection(` ${uid}/journal/notes `)
+            .doc(`${note.id}`);
+
+        const existCollection = response.get();
+
+        if ((await existCollection).exists) {
+            response
+                .update(noteToFirebase)
+                .then(()=>{
+
+                    dispatch(startUpdateNotes(note.id, noteToFirebase));
+                })
+                .catch(console.log);
+
+        }
+    };
+};
+
+export const startUpdateNotes = (id: any, note: any) => ({
+    type: types.notesUpdated,
+    payload: {
+        id,
+        note: {
+            id,
+            ...note,
+        },
+    },
+});

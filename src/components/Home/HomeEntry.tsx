@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { activeNote } from "../../actions/notes";
 type HomeEntryProps = {
     id: number;
     title: string;
@@ -13,8 +15,12 @@ const HomeEntry: React.FC<HomeEntryProps> = ({
     date,
     url,
 }) => {
+    const dispatch = useDispatch();
+    const handleClickActive = () => {
+        dispatch(activeNote(id, { title, body, date, url }));
+    };
     return (
-        <div className="home__entry pointer">
+        <div className="home__entry pointer" onClick={handleClickActive}>
             {url && (
                 <div
                     className="home__entry-picture"

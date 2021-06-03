@@ -22,7 +22,7 @@ const LoginScreen = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         dispatch(startLoginWithEmailPassword(email, password));
-        reset();
+        reset(null);
     };
 
     const handleLoginWithGoogle = () => {
