@@ -26,7 +26,7 @@ const HomeEntry: React.FC<HomeEntryProps> = ({
                     className="home__entry-picture"
                     style={{
                         backgroundSize: "cover",
-                        backgroundImage: ` url(${url}) `,
+                        backgroundImage: `url(${url}) `,
                     }}
                 ></div>
             )}

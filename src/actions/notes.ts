@@ -1,6 +1,8 @@
 import { db } from "../firebase/firebase-config";
 import { loadNotes } from "../helpers/loadNotes";
+import { uploadFile } from "../helpers/uploadFile";
 import { types } from "../types/types";
+import Swal from "sweetalert2";
 
 export const addNewNote = () => {
     return async (dispatch: any, getstate: any) => {
@@ -58,12 +60,11 @@ export const startSaveNote = (note: any) => {
         if ((await existCollection).exists) {
             response
                 .update(noteToFirebase)
-                .then(()=>{
-
+                .then(() => {
                     dispatch(startUpdateNotes(note.id, noteToFirebase));
+                    Swal.fire("Save", note.title, "success");
                 })
                 .catch(console.log);
-
         }
     };
 };
@@ -78,3 +79,27 @@ export const startUpdateNotes = (id: any, note: any) => ({
         },
     },
 });
+
+export const startUploading = (file: any) => {
+    return async (dispatch: any, getState: any) => {
+        const options = {
+            title: "Uploading...",
+            text: "Please wait...",
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading();
+            },
+        };
+        Swal.fire(options);
+
+        const { active: activeNote } = getState().notes;
+
+        const fileURL = await uploadFile(file);
+
+        activeNote.url = fileURL;
+
+        dispatch(startSaveNote(activeNote));
+
+        Swal.close();
+    };
+};
