@@ -12,7 +12,7 @@ const LoginScreen = () => {
     const dispatch = useDispatch();
     const { loading } = useSelector((state: any) => state.ui);
 
-    const [values, handleInputChange, reset] = useForm<loginInterface>({
+    const [values, handleInputChange] = useForm<loginInterface>({
         email: "admin@gmail.com",
         password: "password",
         // email: "",
