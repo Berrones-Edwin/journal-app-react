@@ -35,4 +35,4 @@ npm run start
 
 ## Preview
 
-![](https://user-images.githubusercontent.com/44040730/107075006-24d7eb00-67af-11eb-9b77-61ff78ccbb57.png)
+![](https://user-images.githubusercontent.com/44040730/121064065-b7ec5600-c78c-11eb-8a14-48895b78b2bd.png)

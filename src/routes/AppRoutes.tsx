@@ -1,14 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Redirect, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import Home from "../components/Home/Home";
 import Auth from "./Auth";
 import { firebase } from "../firebase/firebase-config";
 import { useDispatch } from "react-redux";
 import { login } from "../actions/auth";
 import PrivateRoutes from "./PrivateRoutes";
 import PublicRoutes from "./PublicRoutes";
-import {  startLoadingNotes } from "../actions/notes";
+import { startLoadingNotes } from "../actions/notes";
 
 const AppRoutes = () => {
     const [checking, setChecking] = useState(true);
@@ -21,7 +20,6 @@ const AppRoutes = () => {
             if (user?.uid) {
                 dispatch(login(user?.uid, user?.displayName));
 
-
                 dispatch(startLoadingNotes(user.uid));
 
                 setIsLoggedIn(true);
@@ -33,24 +31,28 @@ const AppRoutes = () => {
 
     if (checking) return <h3>Espere</h3>;
 
+    const Home = lazy(() => import("../components/Home/Home"));
+
     return (
         <BrowserRouter>
             <div>
-                <Switch>
-                    <PublicRoutes
-                        isAuthenticated={isLoggedIn}
-                        path="/auth"
-                        component={Auth}
-                    />
+                <Suspense fallback={<div>Loading....</div>}>
+                    <Switch>
+                        <PublicRoutes
+                            isAuthenticated={isLoggedIn}
+                            path="/auth"
+                            component={Auth}
+                        />
 
-                    <PrivateRoutes
-                        isAuthenticated={isLoggedIn}
-                        component={Home}
-                        exact
-                    />
+                        <PrivateRoutes
+                            isAuthenticated={isLoggedIn}
+                            component={Home}
+                            exact
+                        />
 
-                    <Redirect to="/auth/login" />
-                </Switch>
+                        <Redirect to="/auth/login" />
+                    </Switch>
+                </Suspense>
             </div>
         </BrowserRouter>
     );
