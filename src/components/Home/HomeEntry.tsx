@@ -34,11 +34,9 @@ const HomeEntry: React.FC<HomeEntryProps> = ({
                 <p className="home__entry-title">{title}</p>
                 <p className="home__entry-content">{body}</p>
             </div>
-            <div className="home__entry-date-box">
-                {/* <span>Monday</span>
-                <h4>28</h4> */}
-                {date}
-            </div>
+            <div className="home__entry-date-box">{date}</div>
+
+            
         </div>
     );
 };

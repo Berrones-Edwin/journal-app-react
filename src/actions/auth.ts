@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { firebase, googleAuthProvider } from "../firebase/firebase-config";
 import { finishLoading, startLoading } from "./ui";
 import Swal from "sweetalert2";
+import { notesDelete } from "./notes";
 
 const login = (
     uid: string | undefined,
@@ -67,6 +68,7 @@ const startLogout = () => {
         await firebase.auth().signOut();
 
         dispatch(logout());
+        dispatch(notesDelete());
     };
 };
 

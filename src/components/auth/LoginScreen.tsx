@@ -15,14 +15,15 @@ const LoginScreen = () => {
     const [values, handleInputChange, reset] = useForm<loginInterface>({
         email: "admin@gmail.com",
         password: "password",
+        // email: "",
+        // password: "",
     });
-
-    const { email, password } = values;
+  
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        dispatch(startLoginWithEmailPassword(email, password));
-        reset(null);
+        dispatch(startLoginWithEmailPassword(values.email, values.password));
+        // reset(null);
     };
 
     const handleLoginWithGoogle = () => {
