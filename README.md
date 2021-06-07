@@ -1,7 +1,7 @@
-# Mis Peliculas
+# JournalApp
 
 JournalApp is a website that allows add, edit, delete notes.<br>
-Mega-Pelis es un sitio web que te permite crear, editar y eliminar notas.
+JournalApp es un sitio web que te permite crear, editar y eliminar notas.
 
 ## Technologies | Tecnologías
 
