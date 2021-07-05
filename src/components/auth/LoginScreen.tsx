@@ -13,12 +13,9 @@ const LoginScreen = () => {
     const { loading } = useSelector((state: any) => state.ui);
 
     const [values, handleInputChange] = useForm<loginInterface>({
-        email: "admin@gmail.com",
-        password: "password",
-        // email: "",
-        // password: "",
+        email: "",
+        password: "",
     });
-  
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
