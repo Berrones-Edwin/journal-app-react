@@ -11,20 +11,20 @@ const RegisterScreen = () => {
     const { msg } = useSelector((state: any) => state.ui);
 
     const [values, handleInputChange] = useForm({
-        name: "edwin",
-        email: "admin@gmail.com",
-        password: "password",
-        password2: "password",
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
     });
     const { name, email, password, password2 } = values;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('handle submit');
+        console.log("handle submit");
 
-        if (isFormValid()){
-            console.log('register user');
-            
+        if (isFormValid()) {
+            console.log("register user");
+
             dispatch(startRegisterWithEmailPasswordName(name, email, password));
         }
     };
